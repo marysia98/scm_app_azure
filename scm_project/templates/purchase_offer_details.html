@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  <h1>Szczegóły oferty</h1>
+
+  <div class="menu"> 
+    <a href="{% url 'profile'%}"> <div class="option"> Strona główna</div></a> 
+    <a href="{% url 'plans' %}"> <div class="option"> Aukcje</div></a> 
+    <a href="{% url 'schedules' %}"> <div class="option">Harmonogramy</div></a>
+    <a href="{% url 'logout' %}?next=/"><div class="optionLast">Wyloguj się</div></a>
+    <div style="clear:both"></div>
+  </div>
+
+  <h2>Identyfikator oferty: {{ purchaseoffer.id }}</h2>
+  <p><strong>Oferta sprzedaży nr {{ purchaseoffer.number }}, złożona w ramach aukcji <em>{{ purchaseoffer.plan.name }}</em></strong></p>
+
+  <p><strong>Proponowana cena kupna:</strong> {{ purchaseoffer.retail_unit_price }}</p>
+
+  <h2>Magazyn:</h2>
+  <table class="detailTable">
+    <thead>
+      <tr>
+        <th>parametr</th> 
+        <th>wartość</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr> 
+        <td> <strong>Stan magazynu w pierwszym dniu objętym planem:</strong> </td> 
+        <td style="text-align: center"> {{ purchaseoffer.stock_level }} </td>
+      </tr>
+      <tr> 
+        <td> <strong>Koszt magazynowania jednostki towaru:</strong> </td> 
+        <td style="text-align: center"> {{ purchaseoffer.stock_cost }} </td>
+      </tr>
+      <tr> 
+        <td> <strong>Maksymalna pojemność magazynu:</strong> </td> 
+        <td style="text-align: center"> {{ purchaseoffer.max_stock_capacity }} </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Zapotrzebowanie:</h2>
+
+  <table class="detailTable">
+    <thead>
+      <tr>
+        <th>Numer okresu</th> 
+        <th>Zapotrzebowanie</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for demand in purchaseoffer.demands.all %}
+        <tr> 
+          <td style="text-align: center"><strong>{{ demand.number }}</strong>  </td>
+          <td style="text-align: center"><strong>{{ demand.demand }}</strong>  </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  
+  {% if purchaseoffer.plan.calculate_plan_status == 'rozpoczęto składanie ofert' %}
+    <form action="/accounts/purchaseoffer/update/{{purchaseoffer.id}}/">
+      <input type="submit" value="Edytuj ofertę">
+    </form>
+    <form action="/accounts/purchaseoffer/delete/{{purchaseoffer.id}}/">
+      <input type="submit" value="Usuń ofertę">
+    </form>
+  {% endif %}
+
+  <form>
+    <input type="button" value="Wróć do poprzedniej strony" onclick="history.back()">
+  </form>
+
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block content %}
+  
+  <h1>Szczegóły aukcji</h1>
+
+  <div class="menu"> 
+    <a href="{% url 'profile'%}"> <div class="option"> Strona główna</div></a> 
+    <a href="{% url 'plans' %}"> <div class="option"> Aukcje</div></a> 
+    <a href="{% url 'schedules' %}"> <div class="option">Harmonogramy</div></a>
+    <a href="{% url 'logout' %}?next=/"><div class="optionLast">Wyloguj się</div></a>
+    <div style="clear:both"></div>
+  </div>
+
+  <h1>{{ plan.name }}</h1>
+
+  <p><strong>Opis:</strong> {{ plan.description }}</p>
+
+
+  <p><strong>Status:</strong> {{ plan.calculate_plan_status }}</p>
+
+  <table class="planTable">
+    <thead>
+      <tr>
+        <th>parametr</th> 
+        <th>wartość</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr> 
+        <td> <strong>Liczba okresów</strong> </td> 
+        <td> {{ plan.periods_amount }} </td>
+      </tr>
+      <tr> 
+        <td> <strong>Długość jednego okresu (liczba dni)</strong> </td> 
+        <td> {{ plan.period_length }} </td>
+      </tr>
+      <tr> 
+        <td> <strong>Początek zbierania ofert</strong>  </td> 
+        <td> {{ plan.start_date }} </td>
+      </tr>
+      <tr> 
+        <td> <strong>Koniec zbierania ofert</strong> </td> 
+        <td> {{ plan.end_date }} </td>
+      </tr>
+      <tr> 
+        <td> <strong>Pierwszy dzień harmonogramu</strong> </td> 
+        <td> {{ plan.schedule_beginning }}</p> </td>
+      </tr>
+      <tr> 
+        <td> <strong>Prezentacja harmonogramu</strong> </td> 
+        <td> {{ plan.get_plan_type_display }} </td>
+      </tr>
+      <tr> 
+        <td> <strong>Cena</strong> </td> 
+        <td> {{ plan.get_price_type_display }} </td>
+      </tr>
+    </tbody>
+  </table>
+  
+
+
+  <form>
+    <input type="button" value="Wróć do poprzedniej strony" onclick="history.back()">
+  </form>
+{% endblock %}

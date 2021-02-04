@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}Add production levels{% endblock %}
+
+{% block content %}
+    
+    <h1>Wprowadź szczegóły swojej oferty</h1>
+
+    <div class="menu"> 
+        <a href="{% url 'profile'%}"> <div class="option"> Strona główna</div></a> 
+        <a href="{% url 'plans' %}"> <div class="option"> Aukcje</div></a> 
+        <a href="{% url 'schedules' %}"> <div class="option">Harmonogramy</div></a>
+        <a href="{% url 'logout' %}?next=/"><div class="optionLast">Wyloguj się</div></a>
+        <div style="clear:both"></div>
+    </div>
+
+    <form method='POST' class="post-form">
+        {% csrf_token %}
+
+        {% csrf_token %}
+        {{ form.as_p }}
+        <h2>{{formset_title}}</h2>
+        {{offer_details.as_p}}
+        <button class="save" type="submit" style=""> Zapisz </button>
+
+        {% comment %} <h2>{{form.retail_unit_price.label}}:</h2>
+        <div style="font-size: 20px">
+            {{ form.retail_unit_price }}
+        </div>
+
+        <h2>Dane magazynu</h2>
+        <div style="font-size: 20px">
+            {{ form.stock_level.label }}:
+            {{ form.stock_level }}
+            {{ form.stock_cost.label }}:
+            {{ form.stock_cost }}
+            {{ form.max_stock_capacity.label }}:
+            {{ form.max_stock_capacity }}
+        </div>
+        
+        
+        <h2>Zapotrzebowanie</h2>
+        
+        {% for demand in offer_details %}
+            <div style="font-size: 20px"> 
+                Okres {{ forloop.counter }}:
+                {{ demand }}
+            </div>
+        {% endfor %}
+        <button class="save" type="submit" style=""> Zapisz </button> {% endcomment %}
+    </form>
+
+    <form>
+        <input type="button" value="Wróć do poprzedniej strony" onclick="history.back()">
+    </form>
+
+
+{% endblock %}

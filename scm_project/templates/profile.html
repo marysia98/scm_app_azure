@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+  <h1>Strona domowa użytkownika</h1>
+
+  <div style="clear:both"> </div>
+  <div class="menu"> 
+    <a href="{% url 'profile'%}"> <div class="option"> Strona główna</div></a> 
+    <a href="{% url 'plans' %}"> <div class="option"> Aukcje</div></a> 
+    <a href="{% url 'schedules' %}"> <div class="option">Harmonogramy</div></a>
+    <a href="{% url 'logout' %}?next=/"><div class="optionLast">Wyloguj się</div></a>
+    <div style="clear:both"></div>
+  </div>
+  
+  <div class="info">
+    <p>
+      Witaj w aplikacji przeznaczonej do zarządzania łańcuchem dostaw.
+    </p>
+    <p>
+      Za pomocą aplikacji producenci oraz nabywcy mogą zgłaszać 
+      swoje oferty w ramach aukcji tworzonych przez administratora systemu. Na podstawie tych ofert ułożony zostanie harmonogram współpracy, 
+      który będzie optymalnym planem produkcji i dostaw. Zakładka <em>Aukcje</em> pozwala zapoznać się z aukcjami wprowadzonymi przez administratora,
+      złożyć swoją ofertę lub podejrzeć ofertę złożoną wcześniej. W zakładce <em>Harmonogramy</em> można zapoznać się z gotowymi 
+      planami produkcji i dostaw. W zależności od parametrów aukcji, informacje na temat całego harmonogramu są dostępne dla wszystkich uczestników
+      aukcji, lub każdy z uczestników widzi dane dotyczące go bezpośrednio.
+    </p>
+  </div>
+{% endblock %}

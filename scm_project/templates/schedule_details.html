@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Szczegóły harmonogramu</h1>
+
+  <div class="menu"> 
+    <a href="{% url 'profile'%}"> <div class="option"> Strona główna</div></a> 
+    <a href="{% url 'plans' %}"> <div class="option"> Aukcje</div></a> 
+    <a href="{% url 'schedules' %}"> <div class="option">Harmonogramy</div></a>
+    <a href="{% url 'logout' %}?next=/"><div class="optionLast">Wyloguj się</div></a>
+    <div style="clear:both"></div>
+  </div>
+
+  <div class="info">
+    <p>
+      W poniższej tabeli zaprezentowano szczegóły wynikowego harmonogramu.
+    </p>
+    {% if user_type == 'producer'%}
+      <p>
+        Dla każdego okresu podane są dane dotyczące poziomu produkcji oraz 
+        optymalnej ceny sprzedaży.
+      </p>
+    {% else %}
+      <p>
+        Dla każdego okresu podane są dane dotyczące wielkości zamówienia oraz 
+        optymalnej ceny kupna.
+      </p>
+    {% endif %}
+  </div>
+
+  <table class="planTable">
+    <thead>
+      <tr>
+        <th>numer okresu</th> 
+        {% if user_type == 'producer'%}
+          <th>poziom produkcji</th> 
+        {% if user_type == 'buyer' %}
+          <th>wielkość zamówienia</th> 
+        {% endif %}
+        <th>cena sprzedaży</th> 
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in user_data %}
+        <tr>
+          <td>{{item.period.number}}</td>
+          {% if user_type == 'producer'%}
+            <td>{{item.production_amount}}</td> 
+          {% else %}
+            <td>{{item.purchase_amount}}</td> 
+          {% endif %}
+          <td>{{item.price}}</td>
+        </tr>
+      {%endfor%}
+    </tbody>
+  </table>
+
+
+  <form>
+    <input type="button" value="Wróć do poprzedniej strony" onclick="history.back()">
+  </form>
+
+{% endblock %}

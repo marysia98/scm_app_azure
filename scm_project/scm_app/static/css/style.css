@@ -1,0 +1,280 @@
+body 
+{
+    color:rgb(42, 89, 150);
+    font-family: Verdana;
+}
+
+.appname
+{
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h1
+{
+    text-align: center;
+	letter-spacing: 2px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+h2
+{
+	letter-spacing: 1px;
+	padding-top: 20px;
+	padding-bottom: 5px;
+}
+
+a
+{
+	text-decoration: none;
+	color:rgb(42, 89, 150);
+    font-family: Verdana;
+}
+a:hover
+{
+	color:rgb(32, 67, 112);
+}
+
+
+
+#container
+{
+	background-color: white;
+	width: 300px;
+	padding: 50px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 100px;
+	-webkit-box-shadow: 3px 3px 30px 5px rgba(204,204,204,0.9);
+	-moz-box-shadow: 3px 3px 30px 5px rgba(204,204,204,0.9);
+	box-shadow: 3px 3px 30px 5px rgba(204,204,204,0.9);
+}
+
+input[type=submit]
+{
+	width: 300px;
+	background-color: #417690;;
+	font-size:20px;
+	color: white;
+	padding: 15px 10px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	letter-spacing: 2px;
+	outline: none;
+}
+
+input#id_username, input#id_password 
+{
+    width: 300px;
+	background-color: #efefef;
+	color: #666;
+	border: 2px solid #ddd;
+	border-radius: 5px;
+	font-size: 20px;
+	padding: 10px;
+	box-sizing: border-box;
+	outline: none;
+    margin-top: 10px;
+}
+
+/* formularze */
+input
+{
+    width: 300px;
+	background-color: #efefef;
+	color: #666;
+	border: 2px solid #ddd;
+	border-radius: 5px;
+	font-size: 20px;
+	padding: 10px;
+	box-sizing: border-box;
+	outline: none;
+    margin-top: 10px;
+}
+
+input[type=button]
+{
+	width: auto;
+	background-color: #417690;;
+	font-size:20px;
+	color: white;
+	padding: 15px 10px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	letter-spacing: 2px;
+	outline: none;
+}
+
+input[type=button]:hover, input[type=submit]:hover
+{
+	color:rgb(155, 199, 219);
+}
+
+button[type=submit]
+{
+	width: auto;
+	background-color: #417690;;
+	font-size:20px;
+
+	color: white;
+	padding: 15px 10px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	letter-spacing: 2px;
+	outline: none;
+}
+
+
+
+button.save:hover
+{
+	background-color: #00a740
+}
+
+p
+{
+    font-size: 20px;
+}
+
+.menu 
+{
+    background-color: rgb(42, 89, 150);
+	margin-top: 20px;
+	color: #ffffff;
+	padding: 10px;
+	letter-spacing: 2px;
+}
+
+.option 
+{
+	background-color: rgb(42, 89, 150);
+	color: white;
+    float: left;
+	width: 23%;
+	height: 25px;
+	font-size: 22px;
+	padding: 10px;
+	font-weight: 600;
+	margin: auto;
+	text-align: center;
+	border-right: 2px dotted white;
+}
+.optionLast
+{
+	color: white;
+    float: left;
+	width: 23%;
+	height: 25px;
+	font-size: 22px;
+	padding: 10px;
+	font-weight: 600;
+	margin: auto;
+	text-align: center;
+}
+.option:hover, .optionLast:hover
+{
+	color:rgb(155, 183, 219);
+}
+
+
+/* tabele */
+
+.planTable, .detailTable
+{
+	width:100%;
+	border-collapse: separate;
+	margin-top: 100px;
+	margin-bottom: 100px;
+	table-layout:fixed;
+	-webkit-box-shadow: 3px 3px 30px 5px rgba(204,204,204,0.9);
+	-moz-box-shadow: 3px 3px 30px 5px rgba(204,204,204,0.9);
+	box-shadow: 3px 3px 30px 5px rgba(204,204,204,0.9);
+
+	font-size: 18px;
+}
+.detailTable
+{
+	width:100%;
+	border-collapse:collapse;
+	border-collapse: separate;
+	margin-top: 30px;
+	margin-bottom: 30px;
+	table-layout:fixed;
+	-webkit-box-shadow: 3px 3px 30px 5px rgba(204,204,204,0.9);
+	-moz-box-shadow: 3px 3px 30px 5px rgba(204,204,204,0.9);
+	box-shadow: 3px 3px 30px 5px rgba(204,204,204,0.9);
+	font-size: 18px;
+}
+.public_schedule
+{
+	width:100%;
+	border-collapse:collapse;
+	border-collapse: separate;
+	margin-top: 100px;
+	margin-bottom: 100px;
+	table-layout:fixed;
+	font-size: 18px;
+}
+.planTable  td, .public_schedule td, .detailTable td
+{
+	border-right: 1px dotted white;
+	padding:20px 20px 20px 30px;
+}
+
+.planTable  th, .public_schedule th, .detailTable th
+{
+	color: white;
+	background-color:  rgb(115, 157, 211);
+	padding: 4px;
+	height: 30px; 
+}
+
+
+.planTable tbody tr:nth-child(odd) , .detailTable tbody tr:nth-child(odd) {
+	background-color: #bacdda5e;
+}
+  
+.planTable tbody tr:nth-child(even), .detailTable tbody tr:nth-child(even) {
+	background-color: rgba(255, 255, 255, 0.824);
+}
+
+
+
+
+
+
+
+.info {
+	/* width: 1000px; */
+	width:95%;
+	font-size: 20px;
+	letter-spacing: 1px;
+	line-height: 1.5;
+	color: rgb(34, 70, 117);
+	margin-top: 50px;
+	text-align: justify;
+	padding: 20px;
+	background: rgba(203, 236, 255, 0.582); /* default background for browsers without gradient support */
+  /* css3 */
+	/* background:-webkit-gradient(linear, 0 0, 0 100%, from(rgb(77, 151, 255)), to(rgb(115, 157, 211))); */
+	/* background:-moz-linear-gradient(rgba(115, 157, 211, 0.623), rgb(115, 157, 211)); */
+	/* background:-o-linear-gradient(rgba(115, 157, 211, 0.623), rgb(115, 157, 211)); */
+	background: linear-gradient(rgba(203, 236, 255, 0.582), rgb(159, 201, 255));
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 10px;
+	border-radius: 20px;
+}
+
+
+

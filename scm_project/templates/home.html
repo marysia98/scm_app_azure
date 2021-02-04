@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}SCM strona startowa{% endblock %}
+
+{% block content %}
+  <div class="appname"><h1>Aplikacja wspomagająca zarządzanie łańcuchem dostaw</h1></div>
+
+  {% comment %} <p><a href="{% url 'login' %}">Zaloguj</a></p>
+  <p><a href="{% url 'logout' %}?next=/">Wyloguj</a></p>
+  <p><a href="{% url 'admin:index' %}">Przejdź do panelu administratora</a></p> {% endcomment %}
+
+  <div id="container">
+		<form action="{% url 'login' %}">
+      <input type="submit" value="Panel użytkownika" />
+    </form>
+    <form action="{% url 'admin:index' %}">
+      <input type="submit" value="Panel administratora" />
+    </form>
+	</div>
+{% endblock %}

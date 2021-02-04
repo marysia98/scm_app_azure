@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Delete offer{% endblock %}
+
+{% block content %}
+
+    <form method="post">{% csrf_token %}
+        <h2>Czy na pewno chcesz usunąć ofertę?</h2>
+        <input type="submit" value="Tak">
+    </form>
+    <form>
+        <input type="submit" value="Nie" onclick="history.back()">
+    </form>
+    
+{% endblock %}

@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Szczegóły harmonogramu</h1>
+
+    <div class="menu"> 
+        <a href="{% url 'profile'%}"> <div class="option"> Strona główna</div></a> 
+        <a href="{% url 'plans' %}"> <div class="option"> Aukcje</div></a> 
+        <a href="{% url 'schedules' %}"> <div class="option">Harmonogramy</div></a>
+        <a href="{% url 'logout' %}?next=/"><div class="optionLast">Wyloguj się</div></a>
+        <div style="clear:both"></div>
+    </div>
+  
+    {% if plan_is_public %}
+        <div class="info">
+            <p>
+                W poniższej tabeli zaprezentowano szczegóły wynikowego harmonogramu.
+            </p>
+        </div> 
+    {% else %}
+        <div class="info">
+            <p>
+                W poniższej tabeli zaprezentowano szczegóły wynikowego harmonogramu.
+            </p>
+            {% if user_type == 'producer'%}
+            <p>
+                Dla każdego okresu podane są dane dotyczące poziomu produkcji oraz 
+                optymalnej ceny sprzedaży.
+            </p>
+            {% else %}
+            <p>
+                Dla każdego okresu podane są dane dotyczące wielkości zamówienia oraz 
+                optymalnej ceny kupna.
+            </p>
+            {% endif %}
+        </div>
+    {% endif %}
+
+
+    {% if plan_is_public %}
+        {% if number_of_producers != 0 %}
+            <table class="public_schedule">
+                <col>
+                {% for i in number_of_periods|get_range %}
+                    <colgroup span="2"></colgroup>
+                {% endfor %}
+                <tr>
+                    <td rowspan="2"></td>
+                    {% for period in periods %}
+                        <th colspan="2" scope="colgroup"> Okres {{period.number}} </th>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    {% for period in periods %}
+                        <th scope="col">Wielkość produkcji</th>
+                        <th scope="col">Cena sprzedaży</th>
+                    {% endfor %}
+                </tr>
+                {% for key in producers_dict %}
+                    <tr>
+                        <th scope="row">{{key}}</th>
+                        {% for sale in producers_dict|get_item:key %}
+                            <td>{{sale.production_amount}}</td>
+                            <td>{{sale.price}}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+
+       
+
+        {% if number_of_buyers != 0 %}
+            <table class="public_schedule">
+                <col>
+                {% for i in number_of_periods|get_range %}
+                    <colgroup span="2"></colgroup>
+                {% endfor %}
+                <tr>
+                    <td rowspan="2"></td>
+                    {% for period in periods %}
+                        <th colspan="2" scope="colgroup"> Okres {{period.number}} </th>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    {% for period in periods %}
+                        <th scope="col">Wielkość zamówienia</th>
+                        <th scope="col">Cena kupna</th>
+                    {% endfor %}
+                </tr>
+
+                {% for key in buyers_dict %}
+                    <tr>
+                        <th scope="row">{{key}}</th>
+                        {% for buy in buyers_dict|get_item:key %}
+                            <td>{{buy.purchase_amount}}</td>
+                            <td>{{buy.price}}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+
+            </table>
+        {% endif %}
+    {% else %}
+        <table class="planTable">
+            <thead>
+            <tr>
+                <th>numer okresu</th> 
+                {% if user_type == 'producer'%}
+                <th>poziom produkcji</th> 
+                {% else %}
+                <th>wielkość zamówienia</th> 
+                {% endif %}
+                <th>cena sprzedaży</th> 
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in user_data %}
+                <tr style='text-align:center'>
+                    <td>{{item.period.number}}</td>
+                    {% if user_type == 'producer'%}
+                        <td>{{item.production_amount}}</td> 
+                    {% else %}
+                        <td>{{item.purchase_amount}}</td> 
+                    {% endif %}
+                    <td>{{item.price}}</td>
+                </tr>
+            {%endfor%}
+            </tbody>
+        </table>
+    {% endif %}
+
+    <form>
+        <input type="button" value="Wróć do poprzedniej strony" onclick="history.back()">
+    </form>
+     
+{% endblock %}

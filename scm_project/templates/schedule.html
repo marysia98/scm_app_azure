@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Lista wygenerowanych harmonogramów</h1>
+
+  <div class="menu"> 
+    <a href="{% url 'profile'%}"> <div class="option"> Strona główna</div></a> 
+    <a href="{% url 'plans' %}"> <div class="option"> Aukcje</div></a> 
+    <a href="{% url 'schedules' %}"> <div class="option">Harmonogramy</div></a>
+    <a href="{% url 'logout' %}?next=/"><div class="optionLast">Wyloguj się</div></a>
+    <div style="clear:both"></div>
+  </div>
+
+    
+  <div class="info">
+    <p>
+      Poniżej zaprezentowano harmonogramy ułożone na podstawie zgromadzonych ofert.
+    </p>
+    <p>
+      Aby zapoznać sie ze szczegółami kliknij na nazwę harmonogramu. 
+    </p>
+  </div>
+
+  {% if my_schedules %}
+
+    <table class="planTable">
+        <thead>
+        <tr>
+            <th>aukcja</th>
+            <th>harmonogram</th>
+            <th>początek harmonogramu</th> 
+            <th>typ harmonogramu</th>
+        </tr>
+        </thead>
+        <tbody>
+        {%for schedule in my_schedules %}
+        <tr> 
+            <td><a href="{{ schedule.plan.get_absolute_url }}">{{ schedule.plan.name }}</a></td> 
+            <td><a href="{{ schedule.get_absolute_url }}">{{schedule.name}}</td>
+            <td>{{schedule.plan.start_date}}</td>
+            {% if schedule.plan.is_public %}
+              <td> publiczny </td>
+            {% else %}
+              <td> poufny </td>
+            {% endif %}
+        </tr>
+        {%endfor%}
+        </tbody>
+    </table>
+
+  {% else %}
+    <p>W tej chwili nie masz żadnych harmonogramów do wyświetlenia</p>
+  {% endif %}  
+     
+{% endblock %}

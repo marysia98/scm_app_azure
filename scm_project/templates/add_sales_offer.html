@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Dodaj ofertę sprzedaży{% endblock %}
+
+{% block content %}
+    <h1>Dodaj ofertę sprzedaży</h1>
+    <form method="POST" class="post-form">
+    {% csrf_token %}
+    
+    {{ form.as_p }}
+    
+    <button type="submit">Zapisz ofertę i przejdź do wprowadzenia zdolności produkcyjnych</button>
+
+    $('#add_more').click(function() {
+	var form_idx = $('#id_form-TOTAL_FORMS').val();
+	$('#form_set').append($('#empty_form').html().replace(/__prefix__/g, form_idx));
+	$('#id_form-TOTAL_FORMS').val(parseInt(form_idx) + 1);
+    });
+    </form>
+    <p><a href="{% url 'plans' %}">Wróć do listy planów</a></p>
+
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}Add production levels{% endblock %}
+
+{% block content %}
+    
+    <h1>Wprowadź szczegóły swojej oferty</h1>
+
+    <div class="menu"> 
+        <a href="{% url 'profile'%}"> <div class="option"> Strona główna</div></a> 
+        <a href="{% url 'plans' %}"> <div class="option"> Aukcje</div></a> 
+        <a href="{% url 'schedules' %}"> <div class="option">Harmonogramy</div></a>
+        <a href="{% url 'logout' %}?next=/"><div class="optionLast">Wyloguj się</div></a>
+        <div style="clear:both"></div>
+    </div>
+
+    <form method='POST' class="post-form">
+        {% csrf_token %}
+
+        <h2>{{form.setup_cost.label}}:</h2>
+        <div style="font-size: 20px">
+            {{ form.setup_cost }}
+        </div>
+
+        <h2>Dane magazynu</h2>
+        <div style="font-size: 20px">
+            {{ form.stock_level.label }}:
+            {{ form.stock_level }}
+            {{ form.stock_cost.label }}:
+            {{ form.stock_cost }}
+            {{ form.max_stock_capacity.label }}:
+            {{ form.max_stock_capacity }}
+        </div>
+        
+        
+        <h2>Produkcja</h2>
+        
+        {% for capacity in offer_details %}
+            <div style="font-size: 20px"> 
+
+                {{ capacity }}
+            </div>
+        {% endfor %}
+        <button class="save" type="submit" style=""> Zapisz </button>
+    </form>
+
+    <form>
+        <input type="button" value="Wróć do poprzedniej strony" onclick="history.back()">
+    </form>
+
+
+{% endblock %}

@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Lista aukcji utworzonych przez administratora</h1>
+
+  <div class="menu"> 
+    <a href="{% url 'profile'%}"> <div class="option"> Strona główna</div></a> 
+    <a href="{% url 'plans' %}"> <div class="option"> Aukcje</div></a> 
+    <a href="{% url 'schedules' %}"> <div class="option">Harmonogramy</div></a>
+    <a href="{% url 'logout' %}?next=/"><div class="optionLast">Wyloguj się</div></a>
+    <div style="clear:both"></div>
+  </div>
+
+  <div class="info">
+    <p>
+      W poniższej tabeli zaprezentowano wszystkie aukcje, które zostały wprowadzone do systemu przez administratora.
+    </p>
+    <p>
+      Aby zapoznać sie ze szczegółami aukcji kliknij na jej nazwę. Aukcja może mieć przypisany jeden z czterech statusów:
+    </p>
+    <ol>
+      <li>jeszcze nie rozpoczęto składania ofert</li> 
+      <li>rozpoczęto składanie ofert</li> 
+      <li>zakończono składanie ofert</li> 
+      <li>nieaktywny</li> 
+    </ol>
+    <p>
+      Jeżeli status aukcji brzmi <em>rozpoczęto składanie
+      ofert</em> możesz złożyć ofertę klikając w link <i>oferta</i> znajdujący się w kolumnie oferta. 
+      Jeśli chcesz sprawdzić lub edytować złożoną już ofertę, kliknij w link <em>moja oferta</em>.
+    </p>
+  </div>
+  {% if plan_list %}
+
+
+  {% else %}
+    <p>W tej chwili nie ma żadnych aukcji do wyświetlenia</p>
+  {% endif %}    
+
+  <table class="planTable">
+    <thead>
+      <tr>
+        <th>nazwa aukcji</th> 
+        <th>status</th> 
+        <th>początek zbierania ofert</th> 
+        <th>koniec zbierania ofert</th> 
+        <th>początek harmonogramu</th>
+        <th>oferta</th>
+        <th>czy rozstrzygnięto?</th> 
+      </tr>
+    </thead>
+    <tbody>
+    {%for plan in plan_list %}
+      <tr> 
+          <td><a href="{{ plan.get_absolute_url }}">{{ plan.name }}</a></td> 
+          <td>{{plan.calculate_plan_status}}</td> 
+          <td>{{plan.start_date}}</td>
+          <td>{{plan.end_date}}</td>
+          <td>{{plan.schedule_beginning}}</td>
+          {% if plan in my_plans %}
+            {% for offer in my_offers %}
+              {% if offer.plan == plan %}
+                <td> <a href="{{ offer.get_absolute_url }}"> moja oferta</a></td>
+              {% endif %}
+            {% endfor %}
+          {% else %}  
+            {% if plan.calculate_plan_status == 'rozpoczęto składanie ofert' %}
+              {% if user.user_type == 2 %}
+                <td><a href="/accounts/salesoffer/add/{{plan.id}}/" >złóż ofertę</a></td>
+              {% endif %}
+              {% if user.user_type == 3 %}
+                <td><a href="/accounts/purchaseoffer/add/{{plan.id}}/" >złóż ofertę</a></td>
+              {% endif %}
+            {% else %}
+              <td></td>
+            {% endif %}
+          {% endif %}
+          {% if plan.is_scheduled %}
+            <td>tak</a></td>
+          {% else %}
+            <td>nie</td>
+          {% endif %}
+      </tr>
+    {%endfor%}
+    </tbody>
+  </table>
+     
+{% endblock %}
